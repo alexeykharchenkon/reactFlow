@@ -1,0 +1,35 @@
+.diagram_element {
+    display:flex;
+    flex-direction: column;
+    border-radius: 5%;
+    margin: 15px;
+    color: #000000;
+    border: 1px solid #101111;
+}
+.diagram_element:hover {
+    border: 2px solid #0095a8;
+}
+.diagram_start{
+    width: 50px !important;
+    height: 50px !important;
+    border-radius: 50% !important;
+    background-color: #6ff9ff !important;
+}
+.diagram_end{
+    border-radius: 50%;
+    background-color: #f44336;
+}
+.diagram_phase{
+    background-color: white;
+}
+.diagram_decision{
+    background-color: whitesmoke;
+    transform: translateX(0px) rotate(45deg) !important;
+}
+.diagram_subworkflow{
+    background-color: burlywood;
+}
+.popover{
+    display:flex;
+    flex-direction: column;
+}

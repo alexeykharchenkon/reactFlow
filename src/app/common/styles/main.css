@@ -1,0 +1,50 @@
+.app {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+    background-color: #26c6da;
+}
+
+.upMenu {
+    display: flex;
+    height: 100px;
+    border: 1px solid whitesmoke;
+}
+
+.main {
+    display: flex;
+    flex: 1 0 auto;
+}
+
+.properties {
+    display: flex;
+    width: 200px;
+    padding: 10px;
+}
+
+.toolbox {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 130px;
+    padding: 10px;
+}
+
+.diagram {
+    display: flex;
+    flex: 1 0 auto;
+    border-left: 1px solid whitesmoke;
+    border-right: 1px solid whitesmoke;
+    padding: 10px;
+    background:
+    repeating-linear-gradient(
+      transparent,transparent 20px, #d4dddd 22px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,transparent 20px, #d4dddd 22px
+    );
+    background-color: whitesmoke;
+}
