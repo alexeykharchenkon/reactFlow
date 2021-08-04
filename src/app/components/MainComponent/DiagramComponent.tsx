@@ -1,16 +1,22 @@
+import { nodeTypes } from '@models/dataTypes';
 import React from 'react';
 import ReactFlow, { Controls, MiniMap } from 'react-flow-renderer';
 
 interface DiagramComponentProps {
-    diagramaData: any;
+    nodes: any;
+    edges: any;
 }
-export const DiagramComponent = ({diagramaData}: DiagramComponentProps) => {
+export const DiagramComponent = ({nodes, edges}: DiagramComponentProps) => {
+
+    const onLoad = (reactFlowInstance: any) => { reactFlowInstance.fitView()};
 
     return(
         <div className="diagram">
             <ReactFlow
-                elements={diagramaData}
-                defaultZoom={1.5}
+                elements={nodes.concat(edges)}
+               // onLoad={onLoad}
+                defaultZoom={1}
+                nodeTypes={nodeTypes}
             >
                 <MiniMap />
                 <Controls />

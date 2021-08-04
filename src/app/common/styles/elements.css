@@ -1,35 +1,58 @@
+.node_buttons {
+    align-self: flex-end;
+    margin-bottom: 15px;
+    flex-wrap: nowrap;
+}
+
+.delete_button {
+    margin-right: 5px;
+}
+
+.popover {
+    display: flex;
+    flex-direction: column;
+}
+
 .diagram_element {
     display:flex;
     flex-direction: column;
+    justify-content: start;
     border-radius: 5%;
-    margin: 15px;
     color: #000000;
     border: 1px solid #101111;
+    text-align: center;
 }
 .diagram_element:hover {
     border: 2px solid #0095a8;
 }
 .diagram_start{
-    width: 50px !important;
-    height: 50px !important;
-    border-radius: 50% !important;
-    background-color: #6ff9ff !important;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: #6ff9ff;
 }
 .diagram_end{
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
     background-color: #f44336;
 }
 .diagram_phase{
+    width: 100px;
+    height: 100px;
     background-color: white;
 }
 .diagram_decision{
+    width: 160px;
+    height: 100px;
     background-color: whitesmoke;
-    transform: translateX(0px) rotate(45deg) !important;
 }
 .diagram_subworkflow{
+    width: 100px;
+    height: 100px;
     background-color: burlywood;
 }
-.popover{
-    display:flex;
-    flex-direction: column;
+
+.edgeLabel {
+    border: 1px solid gray !important;
 }

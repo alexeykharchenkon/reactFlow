@@ -8,7 +8,7 @@
 
 .upMenu {
     display: flex;
-    height: 100px;
+    height: 70px;
     border: 1px solid whitesmoke;
 }
 
@@ -19,6 +19,9 @@
 
 .properties {
     display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
     width: 200px;
     padding: 10px;
 }

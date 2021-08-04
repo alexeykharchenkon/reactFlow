@@ -11,7 +11,10 @@ export const MainComponent = observer(() => {
     return(
         <div className="main">
             <ToolboxComponent operationsFunc={dataStore.operationsFunc}/>
-            <DiagramComponent diagramaData={dataStore.diagramaData}/>
+            <DiagramComponent 
+                nodes={dataStore.nodes}
+                edges={dataStore.edges}
+            />
             <PropertiesComponent/>
         </div>
     );
