@@ -1,17 +1,28 @@
+import { ActionType, NodeType } from '@models/enumTypes';
 import { nodeTypes, edgeTypes } from '@models/dataTypes';
 import React from 'react';
+import { useState } from 'react';
 import ReactFlow, { Controls, MiniMap } from 'react-flow-renderer';
 
 interface DiagramComponentProps {
     nodes: any;
     edges: any;
+    operationsFunc: any;
 }
-export const DiagramComponent = ({nodes, edges}: DiagramComponentProps) => {
-  //  const onLoad = (reactFlowInstance: any) => { reactFlowInstance.fitView()};
- //   const onConnect = useCallback((params: any) => {},[]);
- const onElementClick = (event: any, element: any) => {
-     element.data.onChecked(element);
- }
+export const DiagramComponent = ({nodes, edges, operationsFunc}: DiagramComponentProps) => {
+    const [isDragable, setIsDragable] = useState<boolean>(true);
+
+    const onElementClick = (event: any, element: any) => {
+        operationsFunc(ActionType.CHECKELEMENT, element);
+        setIsDragable(true);
+        if(element?.data?.type === NodeType[NodeType.SubWorkFlow]) setIsDragable(false);
+    }
+
+    const onDiagramClick = () => {
+        operationsFunc(ActionType.CHECKELEMENT, undefined);
+        setIsDragable(true);
+    }
+
     return(
         <div className="diagram">
             <ReactFlow
@@ -22,6 +33,8 @@ export const DiagramComponent = ({nodes, edges}: DiagramComponentProps) => {
                 defaultZoom={1}
                 nodeTypes={nodeTypes}
                 edgeTypes={edgeTypes}
+                nodesDraggable={isDragable}
+                onPaneClick={() => onDiagramClick()}
             >
                 <MiniMap />
                 <Controls />

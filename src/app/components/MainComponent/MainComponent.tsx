@@ -14,6 +14,7 @@ export const MainComponent = observer(() => {
             <DiagramComponent 
                 nodes={dataStore.nodes}
                 edges={dataStore.edges}
+                operationsFunc={dataStore.operationsFunc}
             />
             <PropertiesComponent/>
         </div>

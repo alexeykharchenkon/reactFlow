@@ -18,11 +18,8 @@ export class DataStore {
                 maxInputs: 0,
                 maxOutputs: 1,
                 isAFirstElement: true,
-                inputs: [],
-                outputs: [{id: uuidv4()}],
                 onDelete: (id: string) => {this.operationsFunc(ActionType.DELETENODE, id)},
                 onConnect: (element: any) => {this.operationsFunc(ActionType.CONNECTNODES, element)},
-                onChecked: (element: any) => {this.operationsFunc(ActionType.CHECKELEMENT, element)},
             }, 
             position: { x: 50, y: 5 },
             className: "diagram_element diagram_start", 
@@ -48,7 +45,11 @@ export class DataStore {
                 this.connectNodes(element.from, element.to, element.label);
                 break;
             case ActionType.CHECKELEMENT:
-                if(isNode(element))this.checkNode(element);
+                if(element !== undefined && isNode(element)){
+                    this.checkNode(element);
+                }else{
+                    this.checkNode({id:""});
+                }
                 break;
         }
         this.nodes = [...this.nodes];
@@ -86,7 +87,6 @@ export class DataStore {
                     label: label,
                     data: { 
                         onDelete: (id: string) => {this.operationsFunc(ActionType.DELETEEDGE, id)},
-                        onChecked: (element: any) => {this.operationsFunc(ActionType.CHECKELEMENT, element)},
                     },
                 });
             }else{
@@ -99,7 +99,6 @@ export class DataStore {
                     target: to,
                     data: { 
                         onDelete: (id: string) => {this.operationsFunc(ActionType.DELETEEDGE, id)},
-                        onChecked: (element: any) => {this.operationsFunc(ActionType.CHECKELEMENT, element)},
                     },
                 });
             }
@@ -117,13 +116,25 @@ export class DataStore {
     }
 
     addNode = (element: ElementData) => {
-        const inputs = [];
-        const outputs = [];
-
-        if(element.type !== NodeType[NodeType.Start]) inputs.push({id: uuidv4()});
-        if(element.type !== NodeType[NodeType.End]) outputs.push({id: uuidv4()});
-        if(element.type === NodeType[NodeType.Decision]) outputs.push({id: uuidv4()});
-
+        var children: any = [];
+        if(element.type === NodeType[NodeType.SubWorkFlow]){
+            children = [
+                {
+                  id: "1",
+                  type: 'start',
+                  data: { 
+                      label: 'Start', 
+                      dataForSelect: [],
+                      maxInputs: 0,
+                      maxOutputs: 1,
+                      isAFirstElement: true,
+                    },
+                  position: { x: 50, y: 0 },
+                  className: "diagram_element diagram_start", 
+                },
+            ];
+        }
+            
         this.nodes.push({
             id: uuidv4(),
             type: element.type.toLowerCase(),
@@ -134,18 +145,16 @@ export class DataStore {
                 maxInputs: element.maxInputs,
                 maxOutputs: element.maxOutputs,
                 isAFirstElement: false,
-                inputs: inputs,
-                outputs: outputs,
+                children: children,
                 onDelete: (id: string) => {this.operationsFunc(ActionType.DELETENODE, id)},
                 onConnect: (element: any) => {this.operationsFunc(ActionType.CONNECTNODES, element)},
-                onChecked: (element: any) => {this.operationsFunc(ActionType.CHECKELEMENT, element)},
             }, 
             position: { x: 100, y: 100 },
             className: element.className.split(" ")?.map(c => "diagram_" + c).join(" "), 
         });    
-
-        this.setDataForSelect();
-    } 
+    
+        this.setDataForSelect(); 
+    }
 
     setDataForSelect = () => {
         this.nodes.forEach(node => {
