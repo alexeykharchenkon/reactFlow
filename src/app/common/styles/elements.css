@@ -13,6 +13,10 @@
     flex-direction: column;
 }
 
+.checked {
+    border: 2px solid black !important;
+}
+
 .diagram_element {
     display:flex;
     flex-direction: column;

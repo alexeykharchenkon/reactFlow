@@ -18,7 +18,7 @@ export const HandleComponent = ({ data, isConnectable } : HandleComponentProps) 
       <Handle
         type="target"
         position={Position.Left}
-        style={{ background: '#F55E46', width: '10px', height: '10px' }}
+        style={{ background: '#F55E46', width: '15px', height: '15px' }}
         onConnect={(params) => console.log('handle onConnect', params)}
         isConnectable={isConnectable}
       />
@@ -27,7 +27,7 @@ export const HandleComponent = ({ data, isConnectable } : HandleComponentProps) 
       <Handle
         type="source"
         position={Position.Right}
-        style={{ background: '#37ABFE', width: '10px', height: '10px' }}
+        style={{ background: '#37ABFE', width: '15px', height: '15px' }}
         onConnect={(params) => onConnect(params)}
         isConnectable={isConnectable}
       />
@@ -38,7 +38,7 @@ export const HandleComponent = ({ data, isConnectable } : HandleComponentProps) 
             id="yes"
             type="source"
             position={Position.Right}
-            style={{ top: 40, background: '#23dda5', width: '10px', height: '10px' }}
+            style={{ top: 40, background: '#23dda5', width: '15px', height: '15px' }}
             onConnect={(params) => onConnect(params)}
             isConnectable={isConnectable}
         />
@@ -46,7 +46,7 @@ export const HandleComponent = ({ data, isConnectable } : HandleComponentProps) 
             id="no"
             type="source"
             position={Position.Right}
-            style={{ top: 70, background: '#ffaa5b', width: '10px', height: '10px' }}
+            style={{ top: 70, background: '#ffaa5b', width: '15px', height: '15px' }}
             onConnect={(params) => onConnect(params)}
             isConnectable={isConnectable}
         />

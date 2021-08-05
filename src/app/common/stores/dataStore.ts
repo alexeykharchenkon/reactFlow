@@ -2,7 +2,7 @@ import { makeAutoObservable } from "mobx";
 import { v4 as uuidv4 } from 'uuid';
 import { ActionType, NodeType } from "@models/enumTypes";
 import { ElementData } from "@models/dataTypes";
-import { Edge, Elements } from "react-flow-renderer";
+import { Edge, Elements, isNode } from "react-flow-renderer";
 
 
 export class DataStore {
@@ -22,6 +22,7 @@ export class DataStore {
                 outputs: [{id: uuidv4()}],
                 onDelete: (id: string) => {this.operationsFunc(ActionType.DELETENODE, id)},
                 onConnect: (element: any) => {this.operationsFunc(ActionType.CONNECTNODES, element)},
+                onChecked: (element: any) => {this.operationsFunc(ActionType.CHECKELEMENT, element)},
             }, 
             position: { x: 50, y: 5 },
             className: "diagram_element diagram_start", 
@@ -46,9 +47,19 @@ export class DataStore {
             case ActionType.CONNECTNODES:
                 this.connectNodes(element.from, element.to, element.label);
                 break;
+            case ActionType.CHECKELEMENT:
+                if(isNode(element))this.checkNode(element);
+                break;
         }
         this.nodes = [...this.nodes];
         this.edges = [...this.edges];
+    }
+
+    checkNode = (element: any) => {
+        this.nodes.forEach(n => {
+            if(n.id === element.id) n.className = n?.className + " checked";
+            else{ n.className = n?.className?.split("checked").join(" "); }
+        });
     }
 
     connectNodes = (from: string, to: string, label: string) => {
@@ -75,6 +86,7 @@ export class DataStore {
                     label: label,
                     data: { 
                         onDelete: (id: string) => {this.operationsFunc(ActionType.DELETEEDGE, id)},
+                        onChecked: (element: any) => {this.operationsFunc(ActionType.CHECKELEMENT, element)},
                     },
                 });
             }else{
@@ -87,6 +99,7 @@ export class DataStore {
                     target: to,
                     data: { 
                         onDelete: (id: string) => {this.operationsFunc(ActionType.DELETEEDGE, id)},
+                        onChecked: (element: any) => {this.operationsFunc(ActionType.CHECKELEMENT, element)},
                     },
                 });
             }
@@ -99,7 +112,7 @@ export class DataStore {
         this.setDataForSelect();
     }
 
-    deleteEdge= (id: string) => {
+    deleteEdge = (id: string) => {
         this.edges = this.edges?.filter(e => e.id !== id);
     }
 
@@ -125,6 +138,7 @@ export class DataStore {
                 outputs: outputs,
                 onDelete: (id: string) => {this.operationsFunc(ActionType.DELETENODE, id)},
                 onConnect: (element: any) => {this.operationsFunc(ActionType.CONNECTNODES, element)},
+                onChecked: (element: any) => {this.operationsFunc(ActionType.CHECKELEMENT, element)},
             }, 
             position: { x: 100, y: 100 },
             className: element.className.split(" ")?.map(c => "diagram_" + c).join(" "), 

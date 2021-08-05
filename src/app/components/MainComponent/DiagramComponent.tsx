@@ -9,13 +9,16 @@ interface DiagramComponentProps {
 export const DiagramComponent = ({nodes, edges}: DiagramComponentProps) => {
   //  const onLoad = (reactFlowInstance: any) => { reactFlowInstance.fitView()};
  //   const onConnect = useCallback((params: any) => {},[]);
-
+ const onElementClick = (event: any, element: any) => {
+     element.data.onChecked(element);
+ }
     return(
         <div className="diagram">
             <ReactFlow
                 elements={nodes.concat(edges)}
                // onLoad={onLoad}
                // onConnect={onConnect}
+                onElementClick={(event, element) => onElementClick(event, element)}
                 defaultZoom={1}
                 nodeTypes={nodeTypes}
                 edgeTypes={edgeTypes}

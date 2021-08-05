@@ -36,6 +36,7 @@ export const CustomEdge = ({id, label, sourceX, sourceY, targetX, targetY,
             {label}
             <Button 
                 rounded
+                outline
                 icon="times" 
                 size="small" 
                 color="danger"
