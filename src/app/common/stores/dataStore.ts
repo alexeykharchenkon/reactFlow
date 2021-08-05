@@ -52,27 +52,35 @@ export class DataStore {
         const nodeFrom  = this.nodes.find(n => n.id === from);
         const nodeTo  = this.nodes.find(n => n.id === to);
 
-        if(nodeFrom?.data?.type === NodeType[NodeType.Decision]){
-            this.edges = this.edges?.filter(e => e.sourceHandle !== e.id + label.toLowerCase());
+        const inputsCount = this.edges.filter(e => e.target === nodeTo?.id).length;
 
-            const id = uuidv4(); 
-            this.edges?.push({
-                id: id,
-                type: 'straight',
-                source: from,
-                target: to,
-                sourceHandle: label.toLowerCase(),
-                label: label,
-            });
-        }else{
-            this.edges = this.edges?.filter(e => e.source !== from);
+        if(inputsCount < nodeTo?.data?.maxInputs){
+            if(nodeFrom?.data?.type === NodeType[NodeType.Decision]){
+                const edges = this.edges.filter(e => e.source === from);
+                const firstEdge = edges?.find(e => e.source === from && e.sourceHandle === label.toLowerCase());
+                const secondEdge = edges?.find(e => e.source === from && e.target === to);
+                
+                this.edges = this.edges?.filter(e => e.id !== firstEdge?.id);
+                this.edges = this.edges?.filter(e => e.id !== secondEdge?.id);
 
-            this.edges?.push({
-                id: uuidv4(),
-                type: 'straight',
-                source: from,
-                target: to,
-            });
+                this.edges?.push({
+                    id: uuidv4(),
+                    type: 'straight',
+                    source: from,
+                    target: to,
+                    sourceHandle: label.toLowerCase(),
+                    label: label,
+                });
+            }else{
+                this.edges = this.edges?.filter(e => e.source !== from);
+
+                this.edges?.push({
+                    id: uuidv4(),
+                    type: 'straight',
+                    source: from,
+                    target: to,
+                });
+            }
         }
     }
 
