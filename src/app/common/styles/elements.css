@@ -16,7 +16,6 @@
 .diagram_element {
     display:flex;
     flex-direction: column;
-    justify-content: start;
     border-radius: 5%;
     color: #000000;
     border: 1px solid #101111;
@@ -48,11 +47,11 @@
     background-color: whitesmoke;
 }
 .diagram_subworkflow{
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
     background-color: burlywood;
 }
 
 .edgeLabel {
-    border: 1px solid gray !important;
+    text-align: center;
 }

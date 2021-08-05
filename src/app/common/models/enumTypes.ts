@@ -1,7 +1,8 @@
 export enum ActionType {
     ADDNODE,
     DELETENODE,
-    CONNECTNODES
+    CONNECTNODES,
+    DELETEEDGE,
 }
 
 export enum NodeType {

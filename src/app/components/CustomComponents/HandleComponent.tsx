@@ -8,7 +8,10 @@ interface HandleComponentProps {
 }
 
 export const HandleComponent = ({ data, isConnectable } : HandleComponentProps) => {
- 
+  const onConnect = (params: any) => {
+    data.onConnect({from: params.source, to: params.target, label: params.sourceHandle});
+  }
+
   return (
     <>
     {data.type !== NodeType[NodeType.Start] &&
@@ -25,26 +28,26 @@ export const HandleComponent = ({ data, isConnectable } : HandleComponentProps) 
         type="source"
         position={Position.Right}
         style={{ background: '#37ABFE', width: '10px', height: '10px' }}
-        onConnect={(params) => console.log('handle onConnect', params)}
+        onConnect={(params) => onConnect(params)}
         isConnectable={isConnectable}
       />
     }
     {data.type === NodeType[NodeType.Decision] &&
     <>
         <Handle
-            id="no"
-            type="source"
-            position={Position.Right}
-            style={{ top: 40, background: '#37ABFE', width: '10px', height: '10px' }}
-            onConnect={(params) => console.log('handle onConnect', params)}
-            isConnectable={isConnectable}
-        />
-        <Handle
             id="yes"
             type="source"
             position={Position.Right}
-            style={{ top: 60, background: '#37ABFE', width: '10px', height: '10px' }}
-            onConnect={(params) => console.log('handle onConnect', params)}
+            style={{ top: 40, background: '#23dda5', width: '10px', height: '10px' }}
+            onConnect={(params) => onConnect(params)}
+            isConnectable={isConnectable}
+        />
+        <Handle
+            id="no"
+            type="source"
+            position={Position.Right}
+            style={{ top: 70, background: '#ffaa5b', width: '10px', height: '10px' }}
+            onConnect={(params) => onConnect(params)}
             isConnectable={isConnectable}
         />
     </>

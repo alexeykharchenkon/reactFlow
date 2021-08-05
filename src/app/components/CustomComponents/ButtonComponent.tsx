@@ -31,18 +31,18 @@ export const ButtonComponent = ({ id, data } : ButtonComponentProps) => {
           {data.type === NodeType[NodeType.Decision] && 
           <>
             <ConnectPopoverComponent 
-              trigger={<Button icon="plus" size="small" color="primary"  className="delete_button">Yes</Button>}
+              trigger={<Button icon="plus" size="small" color="success"  className="delete_button">yes</Button>}
               onConnect={data.onConnect}
               dataForSelect={data.dataForSelect}
               from={id}
-              label={"Yes"}
+              label={"yes"}
             />
             <ConnectPopoverComponent 
-              trigger={<Button icon="plus" size="small" color="primary">No</Button>}
+              trigger={<Button icon="plus" size="small" color="warning">no</Button>}
               onConnect={data.onConnect}
               dataForSelect={data.dataForSelect}
               from={id}
-              label={"No"}
+              label={"no"}
             />
           </>
         }

@@ -40,6 +40,9 @@ export class DataStore {
             case ActionType.DELETENODE:
                 this.deleteNode(element);
                 break;
+            case ActionType.DELETEEDGE:
+                this.deleteEdge(element);
+                break;
             case ActionType.CONNECTNODES:
                 this.connectNodes(element.from, element.to, element.label);
                 break;
@@ -52,12 +55,12 @@ export class DataStore {
         const nodeFrom  = this.nodes.find(n => n.id === from);
         const nodeTo  = this.nodes.find(n => n.id === to);
 
-        const inputsCount = this.edges.filter(e => e.target === nodeTo?.id).length;
+        const inputsCount = this.edges.filter(e => e.target === to).length;
 
         if(inputsCount < nodeTo?.data?.maxInputs){
             if(nodeFrom?.data?.type === NodeType[NodeType.Decision]){
                 const edges = this.edges.filter(e => e.source === from);
-                const firstEdge = edges?.find(e => e.source === from && e.sourceHandle === label.toLowerCase());
+                const firstEdge = edges?.find(e => e.source === from && e.sourceHandle === label);
                 const secondEdge = edges?.find(e => e.source === from && e.target === to);
                 
                 this.edges = this.edges?.filter(e => e.id !== firstEdge?.id);
@@ -65,44 +68,39 @@ export class DataStore {
 
                 this.edges?.push({
                     id: uuidv4(),
-                    type: 'straight',
+                    type: 'buttonedge',
                     source: from,
                     target: to,
-                    sourceHandle: label.toLowerCase(),
+                    sourceHandle: label,
                     label: label,
+                    data: { 
+                        onDelete: (id: string) => {this.operationsFunc(ActionType.DELETEEDGE, id)},
+                    },
                 });
             }else{
                 this.edges = this.edges?.filter(e => e.source !== from);
 
                 this.edges?.push({
                     id: uuidv4(),
-                    type: 'straight',
+                    type: 'buttonedge',
                     source: from,
                     target: to,
+                    data: { 
+                        onDelete: (id: string) => {this.operationsFunc(ActionType.DELETEEDGE, id)},
+                    },
                 });
             }
         }
     }
 
- /*   addLink = (outputsFrom: Port[], inputsTo: Port[], i: number, label: string, maxOutputs: number, maxInputs: number) => {
-        //this.edges = this.edges?.filter(l => l.input !== outputsFrom[i].id);
-
-        const linksOut = this.edges?.filter(l => l.input  === outputsFrom[i].id);
-        const linksIn = this.edges?.filter(l => l.output  === inputsTo[0].id);
-
-        if(linksOut?.length as number < maxOutputs && linksIn?.length as number < maxInputs) 
-            this.edges?.push({  });
-    }*/
-
     deleteNode = (id: string) => {
-      //  const node = this.nodes.find(n => n.id === id);
-
-      //  node?.inputs?.forEach(i => {this.schema.links = this.schema.links?.filter(l => l.output !== i.id);});
-     //   node?.outputs?.forEach(o => {this.schema.links = this.schema.links?.filter(l => l.input !== o.id);});
-
+        this.edges = this.edges?.filter(e => e.source !== id && e.target !== id);
         this.nodes = this.nodes.filter(n => n.id !== id);
+        this.setDataForSelect();
+    }
 
-       // this.setDataForSelect();
+    deleteEdge= (id: string) => {
+        this.edges = this.edges?.filter(e => e.id !== id);
     }
 
     addNode = (element: ElementData) => {

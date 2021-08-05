@@ -1,4 +1,6 @@
-import { BaseComponent } from "@app/components/CustomComponents/BaseComponent";
+import { CustomEdge } from "@components/CustomComponents/CustomEdge";
+import { BaseComponent } from "@components/CustomComponents/BaseComponent";
+import { SubworkflowComponent } from "@components/CustomComponents/SubworkflowComponent";
 
 export interface ElementData {
     className: string;
@@ -13,7 +15,11 @@ export interface ElementData {
     end: BaseComponent,
     phase: BaseComponent,
     decision: BaseComponent,
-  //  subworkflow: SubworkflowComponent,
+    subworkflow: SubworkflowComponent,
+  };
+
+  export const edgeTypes = {
+    buttonedge: CustomEdge,
   };
 
   export interface DataForSelect {
