@@ -5,12 +5,19 @@ import '@styles/elements.css';
 import 'beautiful-react-ui/beautiful-react-ui.css';
 import { UpMenuComponent } from '@components/UpMenuComponent/UpMenuComponent';
 import { MainComponent } from '@components/MainComponent/MainComponent';
+import { useStore } from '@stores/rootStore';
+import { observer } from 'mobx-react-lite';
 
-export const App = () => {
+export const App = observer(() => {
+  const { dataStore } = useStore();
   return (
     <div className="app">
-      <UpMenuComponent/>
-      <MainComponent/>
+      <UpMenuComponent operationsFunc={dataStore.operationsFunc}/>
+      <MainComponent 
+        nodes={dataStore.nodes}
+        edges={dataStore.edges}
+        operationsFunc={dataStore.operationsFunc}
+      />
     </div>
   );
-}
+});

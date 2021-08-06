@@ -31,6 +31,8 @@ export const DiagramComponent = ({nodes, edges, operationsFunc}: DiagramComponen
                // onConnect={onConnect}
                 onElementClick={(event, element) => onElementClick(event, element)}
                 defaultZoom={1}
+                minZoom={0.01}
+                maxZoom={100}
                 nodeTypes={nodeTypes}
                 edgeTypes={edgeTypes}
                 nodesDraggable={isDragable}

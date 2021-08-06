@@ -12,6 +12,10 @@ interface SubworkflowComponentProps {
 
 export const SubworkflowComponent = memo(({ id, data, isConnectable } : SubworkflowComponentProps) => {
  
+  const onElementClick = (event: any, element: any) => {
+    data.onClick(element); 
+  }
+
   return (
     <>
      <div className="node_buttons">
@@ -37,6 +41,7 @@ export const SubworkflowComponent = memo(({ id, data, isConnectable } : Subworkf
                 zoomOnScroll={false}
                 elements={data.children}
                 nodeTypes={nodeTypes}
+                onElementClick={(event, element) => onElementClick(event, element)} 
               />
             </ReactFlowProvider>
           

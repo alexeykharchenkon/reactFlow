@@ -3,7 +3,8 @@ export enum ActionType {
     DELETENODE,
     CONNECTNODES,
     DELETEEDGE,
-    CHECKELEMENT
+    CHECKELEMENT,
+    LOADDIAGRAM
 }
 
 export enum NodeType {

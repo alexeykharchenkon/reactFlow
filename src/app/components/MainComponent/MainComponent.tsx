@@ -1,20 +1,24 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
-import { useStore } from '@stores/rootStore';
 import { DiagramComponent } from './DiagramComponent';
 import { PropertiesComponent } from './PropertiesComponent';
 import { ToolboxComponent } from './ToolboxComponent';
 
-export const MainComponent = observer(() => {
-    const { dataStore } = useStore();
+interface MainComponentProps {
+    nodes: any;
+    edges: any;
+    operationsFunc: any;
+}
+
+export const MainComponent = observer(({nodes, edges, operationsFunc} : MainComponentProps) => {
 
     return(
         <div className="main">
-            <ToolboxComponent operationsFunc={dataStore.operationsFunc}/>
+            <ToolboxComponent operationsFunc={operationsFunc}/>
             <DiagramComponent 
-                nodes={dataStore.nodes}
-                edges={dataStore.edges}
-                operationsFunc={dataStore.operationsFunc}
+                nodes={nodes}
+                edges={edges}
+                operationsFunc={operationsFunc}
             />
             <PropertiesComponent/>
         </div>

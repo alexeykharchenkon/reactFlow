@@ -1,11 +1,20 @@
+import { ActionType } from '@models/enumTypes';
+import { Button } from 'beautiful-react-ui';
 import React from 'react';
 
+interface ToolboxProps {
+    operationsFunc: any;
+}
 
-export const UpMenuComponent = () => {
+export const UpMenuComponent = ({operationsFunc}: ToolboxProps) => {
 
     return(
         <div className="upMenu">
-            Up Menu
+            <Button 
+                onClick={() => { operationsFunc(ActionType.LOADDIAGRAM, "")}}
+            >
+                Load Diagram
+            </Button>
         </div>
     );
 }

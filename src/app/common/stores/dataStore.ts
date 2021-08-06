@@ -3,7 +3,10 @@ import { v4 as uuidv4 } from 'uuid';
 import { ActionType, NodeType } from "@models/enumTypes";
 import { ElementData } from "@models/dataTypes";
 import { Edge, Elements, isNode } from "react-flow-renderer";
-
+import TaskNodeData from '@common/data/TaskNodeData.json';
+import ActionPhaseNodeData from '@common/data/ActionPhaseNodeData.json';
+import ApprovalDecisionNodeData from '@common/data/ApprovalDecisionNodeData.json';
+import StartNodeData from '@common/data/StartNodeData.json';
 
 export class DataStore {
 
@@ -18,8 +21,11 @@ export class DataStore {
                 maxInputs: 0,
                 maxOutputs: 1,
                 isAFirstElement: true,
+                parentId: "",
+                children: [],
                 onDelete: (id: string) => {this.operationsFunc(ActionType.DELETENODE, id)},
                 onConnect: (element: any) => {this.operationsFunc(ActionType.CONNECTNODES, element)},
+                onClick: (element: any) => {this.operationsFunc(ActionType.CHECKELEMENT, element)},
             }, 
             position: { x: 50, y: 5 },
             className: "diagram_element diagram_start", 
@@ -28,7 +34,9 @@ export class DataStore {
 
     edges: Edge<any> [] = [];
    
-    constructor() { makeAutoObservable(this); }
+    constructor() { 
+        makeAutoObservable(this); 
+    }
 
     operationsFunc = (actionType: any, element: any) => {
         switch(actionType) {
@@ -51,6 +59,12 @@ export class DataStore {
                     this.checkNode({id:""});
                 }
                 break;
+            case ActionType.LOADDIAGRAM:
+                this.nodes = TaskNodeData as any;
+                this.nodes = this.nodes.concat(ActionPhaseNodeData as any);
+                this.nodes = this.nodes.concat(ApprovalDecisionNodeData as any);
+                this.nodes = this.nodes.concat(StartNodeData as any);
+                break;
         }
         this.nodes = [...this.nodes];
         this.edges = [...this.edges];
@@ -60,6 +74,11 @@ export class DataStore {
         this.nodes.forEach(n => {
             if(n.id === element.id) n.className = n?.className + " checked";
             else{ n.className = n?.className?.split("checked").join(" "); }
+            
+       /*     n.data?.children?.forEach((cN: Element) => {
+                if(cN.id === element.id) cN.className = cN?.className + " checked";
+                else{ cN.className = cN?.className?.split("checked").join(" "); }
+            });*/
         });
     }
 
@@ -120,7 +139,7 @@ export class DataStore {
         if(element.type === NodeType[NodeType.SubWorkFlow]){
             children = [
                 {
-                  id: "1",
+                  id: "23",
                   type: 'start',
                   data: { 
                       label: 'Start', 
@@ -128,6 +147,8 @@ export class DataStore {
                       maxInputs: 0,
                       maxOutputs: 1,
                       isAFirstElement: true,
+                      onDelete: (id: string) => {this.operationsFunc(ActionType.DELETENODE, id)},
+                      onConnect: (element: any) => {this.operationsFunc(ActionType.CONNECTNODES, element)},
                     },
                   position: { x: 50, y: 0 },
                   className: "diagram_element diagram_start", 
@@ -148,6 +169,7 @@ export class DataStore {
                 children: children,
                 onDelete: (id: string) => {this.operationsFunc(ActionType.DELETENODE, id)},
                 onConnect: (element: any) => {this.operationsFunc(ActionType.CONNECTNODES, element)},
+                onClick: (element: any) => {this.operationsFunc(ActionType.CHECKELEMENT, element)},
             }, 
             position: { x: 100, y: 100 },
             className: element.className.split(" ")?.map(c => "diagram_" + c).join(" "), 
