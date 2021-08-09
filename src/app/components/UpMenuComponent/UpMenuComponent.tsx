@@ -1,6 +1,5 @@
-import { ActionType } from '@models/enumTypes';
 import { Button } from 'beautiful-react-ui';
-import React from 'react';
+import { OpenPopoverComponent } from './OpenPopoverComponent';
 
 interface ToolboxProps {
     operationsFunc: any;
@@ -8,13 +7,13 @@ interface ToolboxProps {
 
 export const UpMenuComponent = ({operationsFunc}: ToolboxProps) => {
 
+
     return(
         <div className="upMenu">
-            <Button 
-                onClick={() => { operationsFunc(ActionType.LOADDIAGRAM, "")}}
-            >
-                Load Diagram
-            </Button>
+             <OpenPopoverComponent 
+                trigger={<Button className="load_Button">Load Diagram</Button>}
+                operationsFunc={operationsFunc}
+            />
         </div>
     );
 }

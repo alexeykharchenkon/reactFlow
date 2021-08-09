@@ -44,6 +44,7 @@
     width: 100px;
     height: 100px;
     background-color: white;
+    font-size: small;
 }
 .diagram_decision{
     width: 160px;

@@ -22,6 +22,9 @@ export const SubworkflowComponent = memo(({ id, data, isConnectable } : Subworkf
         <ButtonComponent id={id} data={data} />
       </div>
       <div>
+        {data.label}
+      </div>
+      <div>
       <div style={{ position: "relative" }}>
         <div
           style={{

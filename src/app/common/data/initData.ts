@@ -1,5 +1,6 @@
 import { ElementData } from "@models/dataTypes";
 import { NodeType } from "@models/enumTypes";
+import { values } from "./values";
 
 
 const elementsArray: ElementData[] = [
@@ -7,36 +8,36 @@ const elementsArray: ElementData[] = [
         className: "element start",  
         type: NodeType[NodeType.Start], 
         text: 'Start',
-        maxInputs: 0,
-        maxOutputs: 1,
+        maxInputs: values.Start.maxInputs,
+        maxOutputs: values.Start.maxOutputs,
     },
     {
         className: "element end",  
         type: NodeType[NodeType.End], 
         text: 'End',
-        maxInputs: 10,
-        maxOutputs: 0,
+        maxInputs: values.End.maxInputs,
+        maxOutputs: values.End.maxOutputs,
     },
     {
         className: "element phase",  
         type: NodeType[NodeType.Phase], 
         text: 'Phase',
-        maxInputs: 5,
-        maxOutputs: 1,
+        maxInputs: values.Phase.maxInputs,
+        maxOutputs: values.Phase.maxOutputs,
     },
     {
         className: "element decision",  
         type: NodeType[NodeType.Decision], 
         text: 'Decision',
-        maxInputs: 1,
-        maxOutputs: 2,
+        maxInputs: values.Decision.maxInputs,
+        maxOutputs: values.Decision.maxOutputs,
     },
     {
         className: "element subworkflow", 
         type: NodeType[NodeType.SubWorkFlow], 
         text: 'Sub Workflow',
-        maxInputs: 1,
-        maxOutputs: 1,
+        maxInputs: values.Subworkflow.maxInputs,
+        maxOutputs: values.Subworkflow.maxOutputs,
     },
 ];
 

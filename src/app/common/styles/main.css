@@ -8,6 +8,7 @@
 
 .upMenu {
     display: flex;
+    align-items: center;
     height: 70px;
     border: 1px solid whitesmoke;
     padding: 10px;
