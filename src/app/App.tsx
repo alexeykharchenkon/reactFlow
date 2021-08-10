@@ -3,6 +3,7 @@ import '@styles/main.css';
 import '@styles/toolbox.css';
 import '@styles/elements.css';
 import '@styles/upMenu.css';
+import '@styles/properties.css';
 import 'beautiful-react-ui/beautiful-react-ui.css';
 import { UpMenuComponent } from '@components/UpMenuComponent/UpMenuComponent';
 import { MainComponent } from '@components/MainComponent/MainComponent';
@@ -18,6 +19,7 @@ export const App = observer(() => {
         nodes={dataStore.nodes}
         edges={dataStore.edges}
         operationsFunc={dataStore.operationsFunc}
+        activeNode={dataStore.activeNode}
       />
     </div>
   );

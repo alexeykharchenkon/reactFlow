@@ -4,14 +4,14 @@ import { Select } from 'beautiful-react-ui';
 
 
 export const ConnectPopoverComponent = (props: any) => {
-  const {from, dataForSelect, trigger, onConnect, label} = props;
+  const {from, dataForSelect, trigger, onConnect, label, parentId} = props;
 
   const [isOpen, setIsOpen] = useState<boolean>(false); 
   const [selected, setSelected] = useState<any>();
 
   const chooseSelected = (item: any) => {
     setSelected(item);
-    onConnect({from: from, to: item, label: label});
+    onConnect({from: from, to: item, label: label, parentId: parentId});
   }
 
   return (

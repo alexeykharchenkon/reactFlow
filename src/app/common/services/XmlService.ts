@@ -40,7 +40,8 @@ class XmlService {
         result= result.concat(this.convertXML2Nodes(node2, 'SubWorkflowNodeData', NodeType[NodeType.SubWorkFlow]));
         result= result.concat(this.convertXML2Nodes(node2, 'SystemFormNodeData', NodeType[NodeType.SubWorkFlow]));
         result= result.concat(this.convertXML2Nodes(node2, 'InitializationPhase', NodeType[NodeType.SubWorkFlow]));
-        
+        result= result.concat(this.convertXML2Nodes(node2, 'SystemTaskContainerNodeData', NodeType[NodeType.SubWorkFlow]));
+
         return result;
     }
 
@@ -62,6 +63,7 @@ class XmlService {
                         isAFirstElement: false,
                         parentId: nodes[n].getAttribute('SubGraphKey').toString(),
                         children: [],
+                        edges: [],
                     },
                     position: { 
                         x: nodes[n]?.getAttribute('Location').toString().split(" ")[0] * 1.3, 

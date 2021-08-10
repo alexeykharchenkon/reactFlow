@@ -9,7 +9,7 @@ interface HandleComponentProps {
 
 export const HandleComponent = ({ data, isConnectable } : HandleComponentProps) => {
   const onConnect = (params: any) => {
-    data.onConnect({from: params.source, to: params.target, label: params.sourceHandle});
+    data.onConnect({from: params.source, to: params.target, label: params.sourceHandle, parentId: data.parentId});
   }
 
   return (
@@ -19,7 +19,6 @@ export const HandleComponent = ({ data, isConnectable } : HandleComponentProps) 
         type="target"
         position={Position.Left}
         style={{ background: '#F55E46', width: '15px', height: '15px' }}
-        onConnect={(params) => console.log('handle onConnect', params)}
         isConnectable={isConnectable}
       />
     }

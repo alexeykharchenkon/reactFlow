@@ -4,7 +4,10 @@ export enum ActionType {
     CONNECTNODES,
     DELETEEDGE,
     CHECKELEMENT,
-    LOADDIAGRAM
+    LOADDIAGRAM,
+    DELETECHILDEDGE,
+    ONCHANGEPROPERTIES,
+    SAVEPROPERTIES
 }
 
 export enum NodeType {

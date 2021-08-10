@@ -1,4 +1,4 @@
-import { nodeTypes } from '@models/dataTypes';
+import { edgeTypes, nodeTypes } from '@models/dataTypes';
 import React, { memo } from 'react';
 import ReactFlow, { ReactFlowProvider } from 'react-flow-renderer';
 import { ButtonComponent } from './ButtonComponent';
@@ -35,19 +35,19 @@ export const SubworkflowComponent = memo(({ id, data, isConnectable } : Subworkf
             pointerEvents: "none"
           }}
         >
-          
             <ReactFlowProvider>
               <ReactFlow
-                maxZoom={0.1}
-                defaultZoom={0.1}
-                defaultPosition={[0, 0]}
+                maxZoom={0.5}
+                defaultZoom={0.5}
+               // defaultPosition={[0, 0]}
                 zoomOnScroll={false}
-                elements={data.children}
+                elements={data.children.concat(data.edges)}
                 nodeTypes={nodeTypes}
+                edgeTypes={edgeTypes}
+                //onConnect=
                 onElementClick={(event, element) => onElementClick(event, element)} 
               />
             </ReactFlowProvider>
-          
         </div>
       </div>
       </div>

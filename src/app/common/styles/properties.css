@@ -1,0 +1,10 @@
+.button_save {
+    margin-top: 15px;
+}
+
+.properties_input {
+    height: 25px;
+    font-size: 14px;
+    border-radius: 5%;
+    border: none;
+}
